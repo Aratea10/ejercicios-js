@@ -94,7 +94,33 @@ const musicCatalog = () => {
     };
   };
 
-  const sortSongs = (playlistName, criterion) => {};
+  const sortSongs = (playlistName, criterion) => {
+    const sortSongs = (playlistName, criterion) => {
+      const name = String(playlistName || "").trim();
+      if (!name) return;
+
+      const idx = playlists.findIndex(
+        (p) => p.name.toLowerCase() === name.toLowerCase()
+      );
+      if (idx === -1) return;
+
+      const cmp = {
+        title: (a, b) => a.title.localeCompare(b.title),
+        artist: (a, b) => a.artist.localeCompare(b.artist),
+        duration: (a, b) => a.duration - b.duration,
+      }[criterion];
+
+      if (!cmp) return;
+      const target = playlists[idx];
+      const sorted = [...target.songs].sort(cmp);
+      const updated = { ...target, songs: sorted };
+      playlists = [
+        ...playlists.slice(0, idx),
+        updated,
+        ...playlists.slice(idx + 1),
+      ];
+    };
+  };
 
   return {
     createPlaylist,
