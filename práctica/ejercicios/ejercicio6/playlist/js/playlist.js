@@ -11,8 +11,17 @@ const musicCatalog = () => {
     playlists = [...playlists, { name, songs: [] }];
   };
 
-  const getAllPlaylists = () => playlists.map((p) => ({ ...p, songs: [...p.songs] }));
-  const removePlaylist = (playlistName) => {};
+  const getAllPlaylists = () =>
+    playlists.map((p) => ({ ...p, songs: [...p.songs] }));
+
+  const removePlaylist = (playlistName) => {
+    const name = String(playlistName || "").trim();
+    if (!name) return;
+    playlists = playlists.filter(
+      (p) => p.name.toLowerCase() !== name.toLowerCase()
+    );
+  };
+
   const addSongToPlaylist = (playlistName, song) => {};
   const removeSongFromPlaylist = (playlistName, title) => {};
   const favoriteSong = (playlistName, title) => {};
