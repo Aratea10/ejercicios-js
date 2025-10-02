@@ -54,19 +54,46 @@ const musicCatalog = () => {
     const songTitle = String(title || "").trim();
     if (!name || !songTitle) return;
 
-    const idx = playlistName.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    const idx = playlistName.findIndex(
+      (p) => p.name.toLowerCase() === name.toLowerCase()
+    );
     if (idx === -1) return;
 
     const target = playlist[idx];
     const filtered = target.songs.filter(
-        s => s.title.toLowerCase() !== songTitle.toLowerCase()
+      (s) => s.title.toLowerCase() !== songTitle.toLowerCase()
     );
     if (filtered.length === target.songs.length) return;
 
     const updated = { ...target, songs: filtered };
     playlist = [...playlist.slice(0, idx), updated, ...playlist.slice(idx + 1)];
   };
-  const favoriteSong = (playlistName, title) => {};
+  const favoriteSong = (playlistName, title) => {
+    const favoriteSong = (playlistName, title) => {
+      const name = String(playlistName || "").trim();
+      const songTitle = String(title || "").trim();
+      if (!name || !songTitle) return;
+
+      const idx = playlists.findIndex(
+        (p) => p.name.toLowerCase() === name.toLowerCase()
+      );
+      if (idx === -1) return;
+      const target = playlists[idx];
+      const songs = target.songs.map((s) =>
+        s.title.toLowerCase() === songTitle.toLowerCase()
+          ? { ...s, favorite: true }
+          : s
+      );
+
+      const updated = { ...target, songs };
+      playlists = [
+        ...playlists.slice(0, idx),
+        updated,
+        ...playlists.slice(idx + 1),
+      ];
+    };
+  };
+
   const sortSongs = (playlistName, criterion) => {};
 
   return {
