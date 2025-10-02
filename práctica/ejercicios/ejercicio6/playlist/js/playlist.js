@@ -49,7 +49,23 @@ const musicCatalog = () => {
     ];
   };
 
-  const removeSongFromPlaylist = (playlistName, title) => {};
+  const removeSongFromPlaylist = (playlistName, title) => {
+    const name = String(playlistName || "").trim();
+    const songTitle = String(title || "").trim();
+    if (!name || !songTitle) return;
+
+    const idx = playlistName.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    if (idx === -1) return;
+
+    const target = playlist[idx];
+    const filtered = target.songs.filter(
+        s => s.title.toLowerCase() !== songTitle.toLowerCase()
+    );
+    if (filtered.length === target.songs.length) return;
+
+    const updated = { ...target, songs: filtered };
+    playlist = [...playlist.slice(0, idx), updated, ...playlist.slice(idx + 1)];
+  };
   const favoriteSong = (playlistName, title) => {};
   const sortSongs = (playlistName, criterion) => {};
 
