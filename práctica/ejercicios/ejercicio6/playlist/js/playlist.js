@@ -22,7 +22,33 @@ const musicCatalog = () => {
     );
   };
 
-  const addSongToPlaylist = (playlistName, song) => {};
+  const addSongToPlaylist = (playlistName, song) => {
+    const name = String(playlistName || "").trim();
+    if (!name) return;
+
+    const idx = playlists.findIndex(
+      (p) => p.name.toLowerCase() === name.toLowerCase()
+    );
+    if (idx === -1) return;
+
+    const newSong = {
+      title: String(song?.title || "").trim(),
+      artist: String(song?.artist || "").trim(),
+      genre: String(song?.genre || "").trim(),
+      duration: Number(song?.duration) || 0,
+      favorite: false,
+    };
+    if (!newSong.title) return;
+
+    const target = playlists[idx];
+    const updated = { ...target, songs: [...target.songs, newSong] };
+    playlists = [
+      ...playlists.slice(0, idx),
+      updated,
+      ...playlists.slice(idx + 1),
+    ];
+  };
+
   const removeSongFromPlaylist = (playlistName, title) => {};
   const favoriteSong = (playlistName, title) => {};
   const sortSongs = (playlistName, criterion) => {};
