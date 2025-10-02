@@ -11,7 +11,7 @@ const musicCatalog = () => {
     playlists = [...playlists, { name, songs: [] }];
   };
 
-  const getAllPlaylists = () => {};
+  const getAllPlaylists = () => playlists.map((p) => ({ ...p, songs: [...p.songs] }));
   const removePlaylist = (playlistName) => {};
   const addSongToPlaylist = (playlistName, song) => {};
   const removeSongFromPlaylist = (playlistName, title) => {};
