@@ -1,6 +1,6 @@
 ## 📁 Estructura de Archivos
 ```text
-── 📄 .gitignore
+├── 📄 .gitignore
 ├── 📄 Exercise_web19.pdf
 ├── 📄 README.md
 ├── 📁 ejercicio1/
