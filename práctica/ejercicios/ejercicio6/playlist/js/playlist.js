@@ -42,11 +42,7 @@ const musicCatalog = () => {
 
     const target = playlists[idx];
     const updated = { ...target, songs: [...target.songs, newSong] };
-    playlists = [
-      ...playlists.slice(0, idx),
-      updated,
-      ...playlists.slice(idx + 1),
-    ];
+    playlists = [...playlists.slice(0, idx), updated, ...playlists.slice(idx + 1)];
   };
 
   const removeSongFromPlaylist = (playlistName, title) => {
@@ -54,72 +50,65 @@ const musicCatalog = () => {
     const songTitle = String(title || "").trim();
     if (!name || !songTitle) return;
 
-    const idx = playlistName.findIndex(
+    const idx = playlists.findIndex(
       (p) => p.name.toLowerCase() === name.toLowerCase()
     );
     if (idx === -1) return;
 
-    const target = playlist[idx];
+    const target = playlists[idx];
     const filtered = target.songs.filter(
       (s) => s.title.toLowerCase() !== songTitle.toLowerCase()
     );
     if (filtered.length === target.songs.length) return;
 
     const updated = { ...target, songs: filtered };
-    playlist = [...playlist.slice(0, idx), updated, ...playlist.slice(idx + 1)];
+    playlists = [...playlists.slice(0, idx), updated, ...playlists.slice(idx + 1)];
   };
+
   const favoriteSong = (playlistName, title) => {
-    const favoriteSong = (playlistName, title) => {
-      const name = String(playlistName || "").trim();
-      const songTitle = String(title || "").trim();
-      if (!name || !songTitle) return;
+    const name = String(playlistName || "").trim();
+    const songTitle = String(title || "").trim();
+    if (!name || !songTitle) return;
 
-      const idx = playlists.findIndex(
-        (p) => p.name.toLowerCase() === name.toLowerCase()
-      );
-      if (idx === -1) return;
-      const target = playlists[idx];
-      const songs = target.songs.map((s) =>
-        s.title.toLowerCase() === songTitle.toLowerCase()
-          ? { ...s, favorite: true }
-          : s
-      );
+    const idx = playlists.findIndex(
+      (p) => p.name.toLowerCase() === name.toLowerCase()
+    );
+    if (idx === -1) return;
 
-      const updated = { ...target, songs };
-      playlists = [
-        ...playlists.slice(0, idx),
-        updated,
-        ...playlists.slice(idx + 1),
-      ];
-    };
+    const target = playlists[idx];
+    const songs = target.songs.map((s) =>
+      s.title.toLowerCase() === songTitle.toLowerCase()
+        ? { ...s, favorite: true }
+        : s
+    );
+    const updated = { ...target, songs };
+    playlists = [...playlists.slice(0, idx), updated, ...playlists.slice(idx + 1)];
   };
 
   const sortSongs = (playlistName, criterion) => {
-    const sortSongs = (playlistName, criterion) => {
-      const name = String(playlistName || "").trim();
-      if (!name) return;
+    const name = String(playlistName || "").trim();
+    if (!name) return;
 
-      const idx = playlists.findIndex(
-        (p) => p.name.toLowerCase() === name.toLowerCase()
-      );
-      if (idx === -1) return;
+    const idx = playlists.findIndex(
+      (p) => p.name.toLowerCase() === name.toLowerCase()
+    );
+    if (idx === -1) return;
 
-      const cmp = {
-        title: (a, b) => a.title.localeCompare(b.title),
-        artist: (a, b) => a.artist.localeCompare(b.artist),
-        duration: (a, b) => a.duration - b.duration,
-      }[criterion];
+    const cmp =
+      criterion === 'title'
+        ? (a, b) => a.title.localeCompare(b.title)
+        : criterion === 'artist'
+        ? (a, b) => a.artist.localeCompare(b.artist)
+        : criterion === 'duration'
+        ? (a, b) => a.duration - b.duration
+        : null;
 
-      if (!cmp) return;
-      const target = playlists[idx];
-      const sorted = [...target.songs].sort(cmp);
-      const updated = { ...target, songs: sorted };
-      playlists = [
-        ...playlists.slice(0, idx),
-        updated,
-        ...playlists.slice(idx + 1),
-      ];
-    };
+    if (!cmp) return;
+
+    const target = playlists[idx];
+    const sorted = [...target.songs].sort(cmp);
+    const updated = { ...target, songs: sorted };
+    playlists = [...playlists.slice(0, idx), updated, ...playlists.slice(idx + 1)];
   };
 
   return {
