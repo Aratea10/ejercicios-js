@@ -1,4 +1,5 @@
-/* Dado estos productos. 
+/* 
+Dado estos productos. 
 
 const productAName = "T-shirt";
 const productAPrice = 20;

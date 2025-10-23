@@ -1,4 +1,5 @@
-/* Crea una función para poder usar el código de la promoción de productos en el carrito de compras. Esta función debe recibir el nombre del producto y la cantidad, y devolver un mensaje con la promoción aplicada.
+/* 
+Crea una función para poder usar el código de la promoción de productos en el carrito de compras. Esta función debe recibir el nombre del producto y la cantidad, y devolver un mensaje con la promoción aplicada.
 
 Usa tu código o este:
 let message = '';

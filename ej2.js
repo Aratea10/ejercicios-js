@@ -1,4 +1,5 @@
-/* Crea un programa que determine si un usuario puede recibir una promoción basada en su selección de productos.
+/* 
+Crea un programa que determine si un usuario puede recibir una promoción basada en su selección de productos.
 
 Instrucciones:
 1. Crea dos variables que representen el nombre de un producto seleccionado por el usuario y la cantidad. (En nuestro caso será usando prompt).
@@ -10,7 +11,8 @@ Instrucciones:
 - Si selecciona un "Cap" y la cantidad es 3 o más, el mensaje será "¡Obtén una gorra gratis por la compra de 3!".
 - Si no cumple ninguna de las condiciones, el mensaje será "No hay promociones para esta selección".
 
-Muestra el mensaje en un único console.log. */
+Muestra el mensaje en un único console.log. 
+*/
 
 const selectedProduct = prompt("Ingresa el nombre del producto");
 const selectedQuantity = parseInt(prompt("Ingresa la cantidad"), 10);
