@@ -1,5 +1,5 @@
 function yourFunction(n) {
-    return String(n).split('').join('-');
+  return String(n).split('').join('-');
 }
 
-moduloReact.exports = yourFunction;
+module.exports = yourFunction;
