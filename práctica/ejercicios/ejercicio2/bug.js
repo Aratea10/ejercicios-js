@@ -1,10 +1,9 @@
 const calcularPromedio = (numeros) => {
-	let sumaTotal = 0;
-	for (let i = 0; i < numeros.length; i++) {
-		sumaTotal += numeros[i];
-	}
-	const promedio = numeros.length ? sumaTotal / numeros.length : NaN;
-	return promedio;
+  let sumaTotal = 0;
+  for (let i = 0; i < numeros.length; i++) {
+    sumaTotal += numeros[i];
+  }
+  return numeros.length ? sumaTotal / numeros.length : NaN;
 };
 
 const listaNumeros = [1, 2, 3, 4, 5];
